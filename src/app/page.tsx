@@ -24,8 +24,25 @@ export default function Page() {
         Abrir Modal 2
       </button>
 
-      {showModal1 && <Modal1 onClose={() => setShowModal1(false)} />}
-      {showModal2 && <Modal2 onClose={() => setShowModal2(false)} />}
+      {showModal1 && (
+        <Modal1
+          onClose={() => setShowModal1(false)}
+          onOpenModal2={() => {
+            setShowModal1(false);
+            setShowModal2(true);
+          }}
+        />
+      )}
+
+      {showModal2 && (
+        <Modal2
+          onClose={() => setShowModal2(false)}
+          onOpenModal1={() => {
+            setShowModal2(false);
+            setShowModal1(true);
+          }}
+        />
+      )}
     </div>
   );
 }
