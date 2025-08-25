@@ -1,7 +1,18 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    disableStaticImages: true,
+    dangerouslyAllowSVG: true,
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.tsx?$/,
+      use: ['@svgr/webpack']
+    });
+    return config;
+  }
+}
 
-export default nextConfig;
+export default nextConfig
