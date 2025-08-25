@@ -1,9 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import Modal1 from './auth/login/component/login';
 import Modal2 from './auth/login/component/registro';
 
+=======
+import Modal1 from './auth/login/component/modal1';
+import Modal2 from './auth/login/component/modal2';
+import Modal3 from './auth/login/component/modal3';
+>>>>>>> 543bf2f (modal 3)
 
 export default function Page() {
   const [showModal1, setShowModal1] = useState(false);
@@ -51,11 +57,34 @@ export default function Page() {
             setShowModal2(false);
             setShowModal1(true);
           }}
+<<<<<<< HEAD
           
         />
       )}
 
       
+=======
+          onOpenModal3={() => {
+            setShowModal2(false);
+            setShowModal3(true);
+          }}
+        />
+      )}
+
+      {showModal3 && (
+        <Modal3
+          onClose={() => setShowModal3(false)}
+          onOpenModal1={() => {
+            setShowModal3(false);
+            setShowModal1(true);
+          }}
+          onOpenModal2={() => {
+            setShowModal3(false);
+            setShowModal2(true);
+          }}
+        />
+      )}
+>>>>>>> 543bf2f (modal 3)
     </div>
   );
 }
