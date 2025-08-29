@@ -11,7 +11,7 @@ type InputProps = {
   iconSrc: string;
   hasTogglePassword?: boolean;
   value?: string | Date | null;
-  onChange?: (value: Date | null | React.ChangeEvent<HTMLInputElement> | string | null) => void;
+  onChange?: (value: string | Date | null) => void; // TIPO CORRIGIDO
   onBlur?: () => void;
   iconClassName?: string;
   iconContainerClassName?: string;
@@ -47,7 +47,7 @@ export default function InputField({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange(e);
+      onChange(e.target.value); // CORRIGIDO: passa apenas o valor, não o evento
     }
   };
 
@@ -117,7 +117,6 @@ export default function InputField({
           onChange={handleInputChange}
           onBlur={onBlur}
           name={name}
-
           className={`w-full h-11 pl-12 pr-11 rounded-xl bg-transparent  text-sm text-white placeholder:text-white focus:outline-none border-2 border-blue-600  font-bold font-inter`}
         />
 

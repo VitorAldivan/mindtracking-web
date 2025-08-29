@@ -5,6 +5,7 @@ import Image from "next/image";
 import InputField from "./input/index";
 import "react-datepicker/dist/react-datepicker.css";
 import SelectField from "./dropdown/index";
+import AthenaMessage from "./speeach/index";
 
 type SignupModalProps = {
   onClose?: () => void;
@@ -249,9 +250,6 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
   const fullMessageForm =
     "Eu sou a Athena, sua assistente emocional. Estou aqui pra te ajudar a entender melhor seus sentimentos e serei sua parceira nessa jornada de autoconhecimento. Preciso te conhecer um pouco para te cadastrar nesta jornada";
 
-  const fullMessageDone =
-    "Pra começarmos do jeitinho certo, me conta seu nome e quando você nasceu. Assim, posso te conhecer melhor e deixar tudo mais personalizado por aqui";
-
   // Funções de validação
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -310,7 +308,7 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
     if (month < 1 || month > 12) return 'Mês inválido';
     if (year < 1900) return 'Ano inválido';
     if (birthDate < minDate) return 'Data de nascimento inválida';
-    if (birthDate > maxDate) return 'Você deve ter pelo menos 13 anos';
+    if (birthDate > maxDate) return 'Você deve ter pelo menos 12 anos';
     
     return '';
   };
@@ -324,7 +322,7 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
     if (cleanPhone.length < 10) return 'Telefone deve ter pelo menos 10 dígitos';
     if (cleanPhone.length > 11) return 'Telefone deve ter no máximo 11 dígitos';
     
-    // Validação do DDD (deve ser entre 11 e 99)
+    // Validação do DDD (deve ser entre 11 và 99)
     const ddd = parseInt(cleanPhone.substring(0, 2));
     if (ddd < 11 || ddd > 99) return 'DDD inválido';
     
@@ -437,7 +435,6 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
       setShowMessage(false);
       setTypedMessage("");
       setIsTypingComplete(false);
-      setTimeout(() => setShowMessage(true), 500);
     }
   };
 
@@ -485,13 +482,12 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
   }, [step]);
 
   useEffect(() => {
-    if (!showMessage) return;
+    if (!showMessage || step !== "form") return;
 
-    const fullMessage = step === "form" ? fullMessageForm : fullMessageDone;
     let i = 0;
     const typingInterval = setInterval(() => {
-      if (i < fullMessage.length) {
-        setTypedMessage(fullMessage.substring(0, i + 1));
+      if (i < fullMessageForm.length) {
+        setTypedMessage(fullMessageForm.substring(0, i + 1));
         i++;
       } else {
         clearInterval(typingInterval);
@@ -536,31 +532,21 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
         </div>
 
         {/* Atena + mensagem */}
-        <div className="hidden md:block absolute left-5 bottom-0 translate-y-[5%] translate-x-[10%] pointer-events-none select-none">
-          {showMessage && (
-            <div
-              className="absolute bg-white text-slate-800 p-4 rounded-lg shadow-xl z-20 border border-gray-200"
-              style={{
-                top: step === "form" ? "-120px" : "-140px",
-                right: "-240px",
-                width: "288px",
-                height: "auto",
-              }}
-            >
-              {/* Pontinha */}
-              <div className={`absolute w-5 h-5 bg-white transform rotate-45 ${
-                step === "form" ? "top-[100px] left-[-10px]" : "top-[110px] left-[-10px]"
-              }`}></div>
-              
-              <h3 className="text-[17px] md:text-[18px] font-bold mb-2 text-black leading-tight">
-                {step === "form" ? "Bem-vindo à MindTracking!" : "Tudo pronto!"}
-              </h3>
-              <div style={{ height: "90px", overflowY: "auto" }}>
-                <p className="text-[14px] text-black md:text-[15px] font-medium leading-snug">
-                  {typedMessage}
-                </p>
-              </div>
-            </div>
+        <div className="hidden md:block  absolute left-5 bottom-0 translate-y-[5%] translate-x-[10%] pointer-events-none select-none">
+          {step === "form" && showMessage && (
+            <AthenaMessage 
+              message={typedMessage}
+              title="Bem-vindo à MindTracking!"
+              position={{ top: "-110px", right: "-235px" }}
+            />
+          )}
+
+          {step === "done" && (
+            <AthenaMessage 
+              message="Pra começarmos do jeitinho certo, me conta seu nome e quando você nasceu. Assim, posso te conhecer melhor e deixar tudo mais personalizado por aqui"
+              title="Tudo pronto!"
+              position={{ top: "-25px", right: "-260px" }}
+            />
           )}
 
           <Image
@@ -587,12 +573,13 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
                 Sua jornada rumo ao equilíbrio emocional começa aqui.
               </p>
 
+              {/* INPUTS CORRIGIDOS - AGORA PASSAM APENAS O VALOR */}
               <InputField 
                 placeholder="Email" 
                 type="email" 
                 iconSrc="/images/email.svg" 
                 value={formData.email}
-                onChange={(e) => handleInputChange('email')(e.target.value)}
+                onChange={(value) => handleInputChange('email')(value)}
                 onBlur={handleInputBlur('email')}
                 error={errors.email}
                 name="email"
@@ -603,18 +590,18 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
                 iconSrc="/images/password.svg" 
                 hasTogglePassword 
                 value={formData.password}
-                onChange={(e) => handleInputChange('password')(e.target.value)}
+                onChange={(value) => handleInputChange('password')(value)}
                 onBlur={handleInputBlur('password')}
                 error={errors.password}
                 name="password"
               />
-              <InputField 
+              <InputField a
                 placeholder="Confirme sua senha" 
                 type="password" 
                 iconSrc="/images/password.svg" 
                 hasTogglePassword 
                 value={formData.confirmPassword}
-                onChange={(e) => handleInputChange('confirmPassword')(e.target.value)}
+                onChange={(value) => handleInputChange('confirmPassword')(value)}
                 onBlur={handleInputBlur('confirmPassword')}
                 error={errors.confirmPassword}
                 name="confirmPassword"
@@ -656,12 +643,13 @@ export default function SignupModal({ onClose, onOpenModal1, onBackToLogin }: Si
                 Seu cadastro foi realizado com sucesso. Bem-vindo à plataforma!
               </p>
 
+              {/* INPUT CORRIGIDO - AGORA PASSA APENAS O VALOR */}
               <InputField 
                 placeholder="Nome" 
                 type="text" 
                 iconSrc="/images/user.svg" 
                 value={formData.name}
-                onChange={(e) => handleInputChange('name')(e.target.value)}
+                onChange={(value) => handleInputChange('name')(value)}
                 onBlur={handleInputBlur('name')}
                 error={errors.name}
                 name="name"

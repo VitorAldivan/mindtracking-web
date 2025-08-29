@@ -61,7 +61,7 @@ export default function LoginModal({ onClose, onOpenModal2 }: LoginModalProps) {
 
           {/* Esqueceu senha */}
           <div className="w-full text-right my-3 mb-5 font-inter">
-            <button className="text-sm text-white hover:underline font-bold font-inter">
+            <button className="text-sm text-white cursor-pointer font-bold font-inter">
               Esqueceu sua senha?
             </button>
           </div>
