@@ -1,21 +1,14 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-<<<<<<< HEAD
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-=======
->>>>>>> 543bf2f (modal 3)
 
 /* Aplica a fonte Inter globalmente */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 543bf2f (modal 3)
 /* Remove o botão nativo de "mostrar senha" no Chrome, Edge, Safari */
 input::-ms-reveal,
 input::-ms-clear {
@@ -122,7 +115,6 @@ input:-webkit-autofill:focus {
 .modal-exit-active {
   opacity: 0;
   transition: opacity 300ms;
-<<<<<<< HEAD
 }
 
 @theme inline {
@@ -239,6 +231,4 @@ input:-webkit-autofill:focus {
   body {
     @apply bg-background text-foreground;
   }
-=======
->>>>>>> 543bf2f (modal 3)
 }

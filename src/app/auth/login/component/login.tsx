@@ -66,34 +66,41 @@ export default function LoginModal({ onClose, onOpenModal2 }: LoginModalProps) {
             </button>
           </div>
 
-          <button
-            type="submit"
-            className="w-full h-11 rounded-[1.5rem] bg-blue-600 text-white font-bold transition-all duration-300 font-inter
-             hover:bg-blue-700 hover:shadow-lg hover:bg-blue-500/30
-             active:scale-95 active:shadow-none"
-          >
-            Entrar
-          </button>
+          {/* Botão de Entrar */}
+{/* Botão Entrar */}
+{/* Botão Entrar */}
+<button
+  type="submit"
+  className="w-full h-11 rounded-[1.5rem] 
+             bg-blue-600 text-white font-bold font-inter
+             transition-all  ease-in-out
+             hover:bg-blue-500
+             active:bg-blue-500 active:ring-3 active:ring-inset active:ring-blue-700"
+>
+  Entrar
+</button>
 
-          {/* Divisor */}
-          <div className="flex items-center justify-center w-full my-3 font-inter">
-            <div className="flex-grow h-[0.5px] bg-white/20"></div>
-            <span className="px-4 text-[16px] md:text-base text-white font-inter">Ou</span>
-            <div className="flex-grow h-[0.5px] bg-white/20"></div>
-          </div>
+{/* Divisor */}
+<div className="flex items-center justify-center w-full my-3 font-inter">
+  <div className="flex-grow h-[0.5px] bg-white/20"></div>
+  <span className="px-4 text-[16px] md:text-base text-white font-inter">Ou</span>
+  <div className="flex-grow h-[0.5px] bg-white/20"></div>
+</div>
 
-          {/* Botão para abrir modal2 */}
-          <button
-            onClick={handleOpenModal2}
-            className="w-full h-11 rounded-[1.5rem] font-bold  text-white 
-             transition-all duration-300 ease-in-out font-inter
-             hover:bg-gray-800/30 hover:ring-blue-500 hover:border-blue-400
-             hover:shadow-[0_0_15px_-3px_rgba(37,99,235,0.3)]
-             active:scale-[0.98] active:duration-100
-             ring-2 ring-blue-600"
-          >
-            Ainda não tem uma conta?
-          </button>
+{/* Botão para abrir modal2 */}
+<button
+  onClick={handleOpenModal2}
+  className="w-full h-11 rounded-[1.5rem] font-bold border border-[#2b3640] text-white 
+                           transition-all duration-300 ease-in-out
+                           hover:bg-gray-800/30 hover:ring-blue-500 hover:border-blue-400
+                           hover:shadow-[0_0_15px_-3px_rgba(37,99,235,0.3)]
+                           active:scale-[0.98] ring-2 ring-blue-600"
+>
+  Ainda não tem uma conta?
+</button>
+
+
+
         </div>
 
         {/* Ilustração */}
@@ -109,11 +116,11 @@ export default function LoginModal({ onClose, onOpenModal2 }: LoginModalProps) {
 
         {/* Botão fechar */}
         <button
-          className="absolute top-4 right-4 w-13 h-13 rounded-full text-white hover:bg-white/5 flex items-center justify-center z-50 font-inter"
+          className="absolute top-4 right-4 w-13 h-13 rounded-full text-white  flex items-center justify-center z-50 font-inter cursor-pointer"
           aria-label="Fechar"
           onClick={handleClose}
         >
-          <Image src="/images/fechar.svg" alt="Fechar" width={40} height={32} />
+          <Image src="/images/fechar.svg" alt="Fechar" width={80} height={32} />
         </button>
       </div>
     </div>
